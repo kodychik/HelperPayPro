@@ -1,14 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react'
+import {React, useState} from 'react'
 import {View ,Text, StyleSheet, SafeAreaView
 , Dimensions, ImageBackground, Image, TextInput, Button, Alert } from 'react-native';
 import Home from './Home';
+import Register from './Register';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons'; 
+
+
 
 const Login = ({navigation}) => {
 
     //const router = useRouter();
     //<MaterialIcons name="email" size={24} color="black" />
     //<Feather name="lock" size={24} color="black" />
+
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
+
+    const checkUsernameAndPassword = () => {
+        if (email == null) {
+            Alert.alert("Email cannot be empty");
+            return 0;
+        }
+        else if (password == null) {
+            Alert.alert("Password cannot be empty");
+            return 0;
+        }
+        else if (password.length < 8) {
+            Alert.alert("Password must contain 8 characters");
+            return 0;
+        }
+        
+        return 1;
+    }
+
     return (
         
             <View style={styles.root}>
@@ -20,12 +47,17 @@ const Login = ({navigation}) => {
                     <Text style = {styles.titleText}>Welcome</Text>
                     
                     <View style={styles.inputContainer}>
+
+                        <MaterialIcons style={{marginLeft: 7}} name="email" size={24} color="black" />
+                        <TextInput style={styles.input} value={email} onChange={e => setEmail(e)} placeholder="Email" />
+
                         
-                        <TextInput style={styles.input} placeholder="Email" />
                     </View>
                     <View style={styles.inputContainer}>
-                        
-                        <TextInput style={styles.input} placeholder="Password" />
+                        <Feather style = {{marginLeft: 7}} name="lock" size={24} color="black" />
+
+                        <TextInput style={styles.input} value={password} onChange={e => setPassword(e)} placeholder="Password" type="password"/>
+
                     </View>
                     <View style={styles.forgot}>
                         <Text
@@ -39,14 +71,22 @@ const Login = ({navigation}) => {
                             color="white"
                             title="Login"
 
-                            onPress={() => navigation.navigate("Home")}
+                            onPress={() => {
+                                x = checkUsernameAndPassword();
+                                if (x == 1) {
+                                    navigation.navigate("Home");
+                                }
+                                
+                            }}
                         />
                     </View>
                     <View style={styles.signupBox}>
                         <Text style = {{color:'white', marginRight:5}}>
                             Don't Have an Account?
                         </Text>
-                        <Text style= {{color:'white', fontWeight:'bold'}}>
+                        <Text style= {{color:'white', fontWeight:'bold'}}
+                            onPress = {() => navigation.navigate("Register")}
+                        >
                             Sign Up
                         </Text>
                     </View>
@@ -74,7 +114,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     titleText: {
-        paddingTop: screenHeight * 0.2,
+        paddingTop: screenHeight * 0.15,
         paddingBottom: screenHeight * 0.05,
         textAlign: 'center',
         color: 'white',
@@ -86,16 +126,18 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+
         backgroundColor: "white",
-        height: 40,
+        height: screenHeight * 0.05,
         marginVertical: 10,
-        marginHorizontal: 30,
+        marginHorizontal: 50,
+
         borderRadius: 7,
     }
     ,
+    
     input: {
         padding: 10,
-        
     },
     forgot: {
         flexDirection: 'row',
@@ -103,12 +145,17 @@ const styles = StyleSheet.create({
     },
     forgotText: {
         color: 'white',
+        fontWeight: 'bold',
     },
     loginBox: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: 'plum',
+        height: screenHeight * 0.08,
         marginVertical: 10,
         marginHorizontal:50,
-        borderRadius: 50,
+        borderRadius: 40,
     },
     signupBox: {
         flexDirection: 'row',
