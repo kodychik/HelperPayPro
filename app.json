@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "HelperPayPro",
-    "slug": "HelperPayPro",
+    "slug": "HPP",
+    "description": "Helper Remittance App Beta",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,7 +16,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kodychik.HPP"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +27,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "17659a3a-d3c1-4ce9-abd7-e2bd95f15e0e"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/17659a3a-d3c1-4ce9-abd7-e2bd95f15e0e"
     }
   }
 }
