@@ -2,6 +2,7 @@ import React from 'react'
 import {View ,Text, SafeAreaView} from 'react-native';
 import {StyleSheet, Dimensions, ImageBackground, Image, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons,MaterialIcons,Feather, Ionicons,Entypo,  FontAwesome } from '@expo/vector-icons'; 
+import Currency  from './Currency';
 
 export default function Home(){
 
@@ -79,6 +80,19 @@ export default function Home(){
                 
                 
             </View>
+            {
+                /*
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingTop: screenWidth * 0.07}}>
+                <Image source={require('../assets/advert.png')} style={{width:screenWidth * 0.8, height: screenHeight * 0.2}}/>
+
+
+            </View>
+                */
+            }
+            <View style={styles.currency}>
+                <Currency />
+            </View>
+            
 
             
         </SafeAreaView>
@@ -136,6 +150,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         
+    },
+    currency: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
     }
 
 })
